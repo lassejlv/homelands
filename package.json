@@ -25,6 +25,7 @@
     "@tanstack/router-devtools": "^1.111.11",
     "ky": "^1.7.5",
     "lucide-react": "^0.476.0",
+    "nextjs-toploader": "^3.7.15",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.2",

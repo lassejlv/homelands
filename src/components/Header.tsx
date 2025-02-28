@@ -1,8 +1,9 @@
 import React from 'react'
 import { Search } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
+import { LoginResponse } from '../routes/login'
 
-export default function Header() {
+export default function Header({ session }: { session: LoginResponse | null }) {
   return (
     <header className='bg-black text-white font-odibee-sans'>
       <div className='container mx-auto px-4 py-2 flex justify-between items-center'>
@@ -20,9 +21,20 @@ export default function Header() {
           <Link to='/properties' className='hover:underline' activeProps={{ className: 'text-brown' }}>
             Boliger til salg
           </Link>
-          <Link to='/login' className='hover:underline' activeProps={{ className: 'text-brown' }}>
-            Login
-          </Link>
+          {session ? (
+            <>
+              <Link to='/profile/$profileId' params={{ profileId: session.username }} className='hover:underline' activeProps={{ className: 'text-brown' }}>
+                Profil
+              </Link>
+              <Link to='/logout' className='hover:underline' activeProps={{ className: 'text-brown' }}>
+                Log ud
+              </Link>
+            </>
+          ) : (
+            <Link to='/login' className='hover:underline' activeProps={{ className: 'text-brown' }}>
+              Login
+            </Link>
+          )}
 
           {/* Search */}
           <div className='relative'>

@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { GetHomes, GetStaff } from '../lib/api'
-import Header from '../components/Header'
 import Testimonials from '../components/Testimonials'
 import Team from '../components/Staff'
 import Footer from '../components/Footer'

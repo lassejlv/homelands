@@ -12,14 +12,22 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as PropertiesImport } from './routes/properties'
+import { Route as LogoutImport } from './routes/logout'
 import { Route as LoginImport } from './routes/login'
 import { Route as IndexImport } from './routes/index'
+import { Route as ProfileProfileIdImport } from './routes/profile/$profileId'
 
 // Create/Update Routes
 
 const PropertiesRoute = PropertiesImport.update({
   id: '/properties',
   path: '/properties',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LogoutRoute = LogoutImport.update({
+  id: '/logout',
+  path: '/logout',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -32,6 +40,12 @@ const LoginRoute = LoginImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProfileProfileIdRoute = ProfileProfileIdImport.update({
+  id: '/profile/$profileId',
+  path: '/profile/$profileId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,11 +67,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
+    '/logout': {
+      id: '/logout'
+      path: '/logout'
+      fullPath: '/logout'
+      preLoaderRoute: typeof LogoutImport
+      parentRoute: typeof rootRoute
+    }
     '/properties': {
       id: '/properties'
       path: '/properties'
       fullPath: '/properties'
       preLoaderRoute: typeof PropertiesImport
+      parentRoute: typeof rootRoute
+    }
+    '/profile/$profileId': {
+      id: '/profile/$profileId'
+      path: '/profile/$profileId'
+      fullPath: '/profile/$profileId'
+      preLoaderRoute: typeof ProfileProfileIdImport
       parentRoute: typeof rootRoute
     }
   }
@@ -68,41 +96,57 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/logout': typeof LogoutRoute
   '/properties': typeof PropertiesRoute
+  '/profile/$profileId': typeof ProfileProfileIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/logout': typeof LogoutRoute
   '/properties': typeof PropertiesRoute
+  '/profile/$profileId': typeof ProfileProfileIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/logout': typeof LogoutRoute
   '/properties': typeof PropertiesRoute
+  '/profile/$profileId': typeof ProfileProfileIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/properties'
+  fullPaths: '/' | '/login' | '/logout' | '/properties' | '/profile/$profileId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/properties'
-  id: '__root__' | '/' | '/login' | '/properties'
+  to: '/' | '/login' | '/logout' | '/properties' | '/profile/$profileId'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/logout'
+    | '/properties'
+    | '/profile/$profileId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
+  LogoutRoute: typeof LogoutRoute
   PropertiesRoute: typeof PropertiesRoute
+  ProfileProfileIdRoute: typeof ProfileProfileIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
+  LogoutRoute: LogoutRoute,
   PropertiesRoute: PropertiesRoute,
+  ProfileProfileIdRoute: ProfileProfileIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +161,9 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/login",
-        "/properties"
+        "/logout",
+        "/properties",
+        "/profile/$profileId"
       ]
     },
     "/": {
@@ -126,8 +172,14 @@ export const routeTree = rootRoute
     "/login": {
       "filePath": "login.tsx"
     },
+    "/logout": {
+      "filePath": "logout.tsx"
+    },
     "/properties": {
       "filePath": "properties.tsx"
+    },
+    "/profile/$profileId": {
+      "filePath": "profile/$profileId.tsx"
     }
   }
 }

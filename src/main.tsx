@@ -2,11 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
+import LoadigPage from './components/LoadigPage'
 
 // Set up a Router instance
 const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
+  defaultPendingComponent: LoadigPage,
 })
 
 // Register things for typesafety
