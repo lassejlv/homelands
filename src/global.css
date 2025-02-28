@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap");
+@import "tailwindcss";
+
+@plugin "@tailwindcss/forms";
+
+@theme {
+  --color-rosa: #fed9c9;
+  --color-brown: #af7627;
+}
+
+.font-odibee-sans {
+  font-family: "Odibee Sans", cursive;
+}
